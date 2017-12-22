@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+export PATH=/opt/zbox/:$PATH
+MYSQL_CONFIG="/opt/zbox/etc/mysql/my.cnf"
+APACHE_CONFIG="/opt/zbox/etc/apache/httpd.conf"
+WORK_DIR=`ls /opt/zbox`
+
+if [ "${1:0:1}" == "-" ]; then
+  zbox --help
+elif [ "$#" == "0" ]; then
+  if [ -z "${WORK_DIR}" ]; then
+    tar -zxf /tmp/zbox.tar.gz -C /opt
+    if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
+      sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+    fi
+  else
+    if [ -f "${MYSQL_CONFIG}" -a -f "${APACHE_CONFIG}" ];then
+      echo "Mysql config exist: "${MYSQL_CONFIG}
+      echo "Apache config exist: "${APACHE_CONFIG}
+    else
+      echo "Error: Not exist Mysql or Apache config file(s)."
+      echo "Mysql config should be exist path: "${MYSQL_CONFIG}
+      echo "Apache config should be exist path: "${APACHE_CONFIG}
+      echo "Please Check."
+      exit
+    fi
+  fi
+  cat /opt/zbox/README && zbox start
+  if [ -n "${USER}" -a -n "${PASSWD}" ]; then
+    /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
+  fi
+  tail -f /dev/null
+else
+  exec "$@"
+fi
