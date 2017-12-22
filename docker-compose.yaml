@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
       - "3306:3306"
-    network_node: "host"
+    network_mode: "host"
     volumes:
       - zentao:/opt/zbox/
     restart: always
