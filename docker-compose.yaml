@@ -7,9 +7,12 @@ services:
       - "80:80"
       - "3306:3306"
     network_mode: "host"
+    environment:
+    # specifies you own account and password.
+      USER: "root"
+      PASSWD: "123456"
+      BIND_ADDRESS: "false"
     volumes:
-      - zentao:/opt/zbox/
+    # specifies the path replace "./data".
+      - ./data:/opt/zbox/
     restart: always
-volumes:
-  # 将./data修改为自己指定的路径.
-  zentao: ./data
