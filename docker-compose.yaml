@@ -6,7 +6,8 @@ services:
     ports:
       - "80:80"
       - "3306:3306"
-    network_mode: "host"
+    # if specifies network_mode with host, please delete "ports" value.
+#    network_mode: "host"
     environment:
     # specifies you own account and password.
       USER: "root"
