@@ -20,8 +20,11 @@ elif [ "$#" == "0" ]; then
       echo "Error: Not exist Mysql or Apache config file(s)."
       echo "Mysql config should be exist path: "${MYSQL_CONFIG}
       echo "Apache config should be exist path: "${APACHE_CONFIG}
-      echo "Please Check."
-      exit
+      echo "So reinstall."
+      tar -zxf /tmp/zbox.tar.gz -C /opt/
+      if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
+        sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+      fi
     fi
   fi
   export PATH=/opt/zbox/:$PATH
