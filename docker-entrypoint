@@ -1,16 +1,14 @@
 #!/bin/bash
 set -e
 
-export PATH=/opt/zbox/:$PATH
 MYSQL_CONFIG="/opt/zbox/etc/mysql/my.cnf"
 APACHE_CONFIG="/opt/zbox/etc/apache/httpd.conf"
-WORK_DIR=`ls /opt/zbox`
 
 if [ "${1:0:1}" == "-" ]; then
   zbox --help
 elif [ "$#" == "0" ]; then
-  if [ -z "${WORK_DIR}" ]; then
-    tar -zxf /tmp/zbox.tar.gz -C /opt
+  if [ ! -d "/opt/zbox" ]; then
+    tar -zxf /tmp/zbox.tar.gz -C /opt/
     if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
       sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
     fi
@@ -26,6 +24,7 @@ elif [ "$#" == "0" ]; then
       exit
     fi
   fi
+  export PATH=/opt/zbox/:$PATH
   cat /opt/zbox/README && zbox start
   if [ -n "${USER}" -a -n "${PASSWD}" ]; then
     /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
