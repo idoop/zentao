@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER Swire Chen <idoop@msn.cn>
 
-ENV ZENTAO_URL http://dl.cnezsoft.com/zentao/9.7/ZenTaoPMS.9.7.stable.zbox_64.tar.gz
+ENV ZENTAO_URL http://dl.cnezsoft.com/zentao/9.8/ZenTaoPMS.9.8.stable.zbox_64.tar.gz
 
 RUN apt-get update && apt-get install -y wget php-ldap \
     --no-install-recommends && rm -r /var/lib/apt/lists/*

@@ -3,7 +3,7 @@
 Auto build docker image for zentao(禅道).
 
 Zentao
-- Version: `9.7` *Linux_X64*
+- Version: `9.8` *Linux_X64*
 
 
 ### QuickStart
