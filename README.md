@@ -2,6 +2,8 @@
 
 Auto build docker image for zentao(禅道).
 
+DockerHub:[https://hub.docker.com/r/idoop/zentao/](https://hub.docker.com/r/idoop/zentao/)
+
 Zentao
 - Version: `9.8` *Linux_X64*
 
