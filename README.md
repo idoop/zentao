@@ -27,6 +27,10 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 * `PASSWD` : sets the web login database Adminer password. 
 * `BIND_ADDRESS` : if set value with false,the Mysql server will not bind-address.
 
+Note: The zentao administartor account is **admin**,and init password is **123456**.
+      And MySQL root account password is **123456**,please change password when you first login.
+
+
 ### Building the image
 
 Clone this git,modify `Dockerfile` or `docker-entrypoint` if you want.
