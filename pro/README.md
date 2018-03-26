@@ -5,34 +5,22 @@
 [![ImageLayers Size](https://img.shields.io/imagelayers/image-size/idoop/zentao/latest.svg)](https://hub.docker.com/r/idoop/zentao/)
 [![ImageLayers Layers](https://img.shields.io/imagelayers/layers/idoop/zentao/latest.svg)](https://hub.docker.com/r/idoop/zentao/)
 
-Auto build docker image for zentao(禅道),include open source edition and pro edition.
+Auto build docker image for zentao(禅道).
 
 DockerHub:[https://hub.docker.com/r/idoop/zentao/](https://hub.docker.com/r/idoop/zentao/)
 
-Office Support:[http://www.zentao.net/](http://www.zentao.net/)
+Zentao Pro
+- Version: `6.7.1` *Linux_X64*
 
-- Zentao open source edition Version: `9.8.1` *Linux_X64*
-- Zentao pro Version: `6.7.1` *Linux_X64*
 
 ### QuickStart
 
-open soure edition:
 ```bash
-mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
+docker run -d -p 80:80 -p 3306:3306 \
         -e USER="root" -e PASSWD="password" \
         -e BIND_ADDRESS="false" \
-        -v /data/zbox/:/opt/zbox/ \
+        -v /opt/zbox/:/opt/zbox/ \
         --name zentao-server \
-        idoop/zentao:latest
-```
-
-pro edition:
-```
-mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
-        -e USER="root" -e PASSWD="password" \
-        -e BIND_ADDRESS="false" \
-        -v /data/zbox/:/opt/zbox/ \
-        --name zentao-server-pro \
         idoop/zentao:pro
 ```
 
