@@ -11,8 +11,8 @@ DockerHub:[https://hub.docker.com/r/idoop/zentao/](https://hub.docker.com/r/idoo
 
 Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
-- Zentao open source edition Version: `9.8.2` *Linux_X64*
-- Zentao pro Version: `6.7.2` *Linux_X64*
+- Zentao open source edition Version: `9.8.3` *Linux_X64*
+- Zentao pro Version: `6.7.3` *Linux_X64*
 
 ### QuickStart
 
