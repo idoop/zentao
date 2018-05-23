@@ -26,6 +26,10 @@ elif [ "$#" == "0" ]; then
   if [ -n "${USER}" -a -n "${PASSWD}" ]; then
     /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
   fi
+
+  if [ -n "${SMTP_HOST}" ];then
+    echo "${SMTP_HOST}" >> /etc/hosts
+  fi
   tail -f /dev/null
 else
   exec "$@"
