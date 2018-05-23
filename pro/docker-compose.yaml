@@ -13,6 +13,7 @@ services:
       USER: "root"
       PASSWD: "123456"
       BIND_ADDRESS: "false"
+      SMTP_HOST: "163.177.90.125 smtp.exmail.qq.com"
     volumes:
     # specifies the path replace "./data".
       - ./data:/opt/zbox/
