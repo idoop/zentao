@@ -1,20 +1,21 @@
 version: "2"
 services: 
   zentao:
-    image: idoop/zentao:latest
+    image: zentao:latest
     container_name: zentao
+    # if web response code: 310 ERR_TOO_MANY_REDIRECTS, please use host mode.
+#    network_mode: "host"
     ports:
       - "80:80"
       - "3306:3306"
-    # if web response code: 310 ERR_TOO_MANY_REDIRECTS, please use host mode.
-#    network_mode: "host"
+    # mysql root account default password is '123456'.
+    # the zentao adminstrator account is 'admin',and init password is '123456'.
     environment:
-    # specifies you own account and password.
+    # specifies Adminer account and password for web login database.
       USER: "root"
       PASSWD: "123456"
       BIND_ADDRESS: "false"
       SMTP_HOST: "163.177.90.125 smtp.exmail.qq.com"
     volumes:
-    # specifies the path replace "./data".
       - ./data:/opt/zbox/
     restart: always

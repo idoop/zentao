@@ -10,9 +10,18 @@ Auto build docker image for zentao(禅道),include open source edition and pro e
 DockerHub:[https://hub.docker.com/r/idoop/zentao/](https://hub.docker.com/r/idoop/zentao/)
 
 Office Support:[http://www.zentao.net/](http://www.zentao.net/)
+### Tags
 
-- Zentao open source edition Version: `9.8.3` *Linux_X64*
-- Zentao pro Version: `6.7.3` *Linux_X64*
+**Open soure edition**
+
+- `10.0.0`,`latest`
+- `9.8.3`,`9.8`
+- `9.7`
+- `9.6.3`
+
+**Pro edition**
+
+- `pro`,`pro-6.7.3`
 
 ### QuickStart
 
@@ -47,7 +56,7 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 * `BIND_ADDRESS` : if set value with false,the Mysql server will not bind-address.
 * `SMTP_HOST` : set the smtp server IP and host.(If can't send mail,it will be helpful.)
 
-Note: The zentao administartor account is **admin**,and init password is **123456**.
+Note: The zentao administrator account is **admin**,and init password is **123456**.
       And MySQL root account password is **123456**,please change password when you first login.
 
 
