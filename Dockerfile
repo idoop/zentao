@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Swire Chen <idoop@msn.cn>
 
-ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/10.0/ZenTaoPMS.10.0.stable.zbox_64.tar.gz
+ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/10.1/ZenTaoPMS.10.1.stable.zbox_64.tar.gz
 
 RUN apt-get update && apt-get install -y wget php-ldap \
     --no-install-recommends && rm -r /var/lib/apt/lists/*
