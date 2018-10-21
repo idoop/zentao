@@ -14,7 +14,8 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `10.3`,`latest`
+- `10.4`,`latest`
+- `10.3`
 - `10.1`
 - `10.0`
 - `9.8.3`,`9.8`
@@ -23,7 +24,8 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Pro edition**
 
-- `pro-7.1`,`pro`
+- `pro-7.3`,`pro`
+- `pro-7.1`
 - `pro-6.7.3`
 
 ### QuickStart
@@ -71,5 +73,3 @@ Then execute the following command:
 ```bash
 docker build -t zentao .
 ```
-        
-        
