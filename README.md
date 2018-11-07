@@ -14,7 +14,8 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `10.4`,`latest`
+- `10.5`,`latest`
+- `10.4`
 - `10.3`
 - `10.1`
 - `10.0`
@@ -64,6 +65,10 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 Note: The zentao administrator account is **admin**,and init password is **123456**.
       And MySQL root account password is **123456**,please change password when you first login.
 
+### Upgrade Version
+
+> If you want upgrade the zbox version, just use the newest code to cover the zbox source code under the path `$volume/zbox/app/zentao/`,instead of useing latest docker image.
+> [See Detail](https://www.zentao.net/book/zentaopmshelp/67.html)
 
 ### Building the image
 
