@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Swire Chen <idoop@msn.cn>
 
-ENV ZENTAO_VER=10.5
+ENV ZENTAO_VER=10.6
 
 ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/${ZENTAO_VER}/ZenTaoPMS.${ZENTAO_VER}.stable.zbox_64.tar.gz
 

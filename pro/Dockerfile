@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Swire Chen <idoop@msn.cn>
 
-ENV ZENTAO_VER=7.3
+ENV ZENTAO_VER=7.5.1
 ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/pro${ZENTAO_VER}/ZenTaoPMS.pro${ZENTAO_VER}.zbox_64.tar.gz
 
 COPY docker-entrypoint /usr/local/bin/docker-entrypoint
