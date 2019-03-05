@@ -14,14 +14,14 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `10.6`,`latest`
-- `10.0`,`10.1`,`10.3`,`10.4`,`10.5`
+- `11.3`,`latest`
+- `10.0`,`10.1`,`10.3`,`10.4`,`10.5`,`10.6`
 - `9.6.3`,`9.7`,`9.8`,`9.8.3`
 
 **Pro edition**
 
-- `pro-7.5.1`,`pro`
-- `pro-7.1`,`pro-7.3`
+- `pro-8.2`,`pro`
+- `pro-7.1`,`pro-7.3`,`pro-7.5.1`
 - `pro-6.7.3`
 
 ### QuickStart
