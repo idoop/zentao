@@ -42,7 +42,6 @@ pro edition:
 mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
         -e USER="root" -e PASSWD="password" \
         -e BIND_ADDRESS="false" \
-        -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
         -v /data/zbox/:/opt/zbox/ \
         --name zentao-server-pro \
         idoop/zentao:pro
@@ -54,7 +53,7 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 
 * `USER` : set the web login database Adminer account.
 * `PASSWD` : set the web login database Adminer password. 
-* `BIND_ADDRESS` : if set value with false,the Mysql server will not bind-address.
+* `BIND_ADDRESS` : if set value with `false`,the MySQL server will not bind address.
 * `SMTP_HOST` : set the smtp server IP and host.(If can't send mail,it will be helpful.)
 
 Note: The zentao administrator account is **admin**,and init password is **123456**.

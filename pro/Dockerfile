@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM buildpack-deps:18.04-curl 
 MAINTAINER Swire Chen <idoop@msn.cn>
 
 ENV ZENTAO_VER=8.2
