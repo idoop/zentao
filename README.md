@@ -14,7 +14,7 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `11.3`,`latest`
+- `11.4`,`11.3`,`latest`
 - `10.0`,`10.1`,`10.3`,`10.4`,`10.5`,`10.6`
 - `9.6.3`,`9.7`,`9.8`,`9.8.3`
 
@@ -28,7 +28,8 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 open soure edition:
 ``` bash
-mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
+mkdir -p /data/zbox && \
+docker run -d -p 80:80 -p 3306:3306 \
         -e USER="root" -e PASSWD="password" \
         -e BIND_ADDRESS="false" \
         -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
@@ -39,7 +40,8 @@ mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
 
 pro edition:
 ``` bash
-mkdir -p /data/zbox && docker run -d -p 80:80 -p 3306:3306 \
+mkdir -p /data/zbox && \
+docker run -d -p 80:80 -p 3306:3306 \
         -e USER="root" -e PASSWD="password" \
         -e BIND_ADDRESS="false" \
         -v /data/zbox/:/opt/zbox/ \
@@ -61,12 +63,58 @@ Note: The zentao administrator account is **admin**,and init password is **12345
 
 ### Upgrade Version
 
-> If you want upgrade the zbox version, just use the newest code to cover the zbox source code under the path `$volume/zbox/app/zentao/`,instead of useing latest docker image.
+> If you want upgrade the zentao version, just run a container with the latest docker image and mount the same zbox path `$volume/zbox/`.
+```bash
+# stop and backup old container
+docker stop zentao-server
+docker rename zentao-server zentao-server-bak
+# backup zbox
+cp -r /data/zbox /data/zbox-bak
+# pull the latest image
+docker pull idoop/zentao:latest
+# run new container with the latest image and mount the same path
+docker run -d -p 80:80 -p 3306:3306 \
+        -e USER="root" -e PASSWD="password" \
+        -e BIND_ADDRESS="false" \
+        -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
+        -v /data/zbox/:/opt/zbox/ \
+        --name zentao-server \
+        idoop/zentao:latest
+docker logs -f zentao-server
+```
+You will see the upgrading process logs like following.
+```
+Installed Zentao version: 11.0
+New Zentao version: 11.4
+Backuping config/my.php and upload ...
+Upgrading Zentao ...
+Restoring config/my.php and upload ...
+Upgraded Zentao version to: 11.4
+Please visit your Zentao website to complete the upgrade task.
+ZBOX是Apache、Mysql、PHP的精简的集成环境。使用时，需要将其解压到/opt目录。
+
+/opt/zbox/zbox -h     可以获取帮助
+/opt/zbox/zbox start  启动脚本
+
+Mysql 用户名root，密码为123456。
+
+更多可以访问http://www.zentao.net/goto.php?item=zbox.
+Start Apache success
+Start Mysql success
+Start xxd success
+```
+Wait until `Start xxd success`, visit your zentao website to complete the upgrade task step by step.
+
+After you complete the upgrade task in your zentao website and confirm everything looks good, delete the backups to save your disk space.
+```bash
+docker rm -f zentao-server-bak
+rm -rf /data/zbox-bak
+```
 > [See Detail](https://www.zentao.net/book/zentaopmshelp/67.html)
 
 ### Building the image
 
-Clone this git,modify `Dockerfile` or `docker-entrypoint` if you want.
+Clone this repo, modify `Dockerfile` or `docker-entrypoint` if you want.
 Then execute the following command:
 
 ```bash
