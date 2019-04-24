@@ -28,6 +28,7 @@ elif [ "$#" == "0" ]; then
   cat /opt/zbox/README && zbox start
   if [ -n "${USER}" -a -n "${PASSWD}" ]; then
     /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
+    chmod 0644 /opt/zbox/auth/users
   fi
 
   if [ -n "${SMTP_HOST}" ];then
