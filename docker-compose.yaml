@@ -1,4 +1,4 @@
-version: "2"
+version: "2.2"
 services: 
   zentao:
     image: idoop/zentao:latest
@@ -15,9 +15,8 @@ services:
       USER: "root"
       PASSWD: "123456"
       BIND_ADDRESS: "false"
-#      SMTP_HOST: "163.177.90.125 smtp.exmail.qq.com"
     extra_hosts:
-      - "smtp.exmail.qq.com 163.177.90.125"
+      - "smtp.exmail.qq.com:163.177.90.125"
     volumes:
       - ./data:/opt/zbox/
     restart: always
