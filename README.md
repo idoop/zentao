@@ -14,7 +14,7 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `11.4`,`11.3`,`latest`
+- `11.4.1`,`latest`
 - `10.0`,`10.1`,`10.3`,`10.4`,`10.5`,`10.6`
 - `9.6.3`,`9.7`,`9.8`,`9.8.3`
 
@@ -30,7 +30,7 @@ open soure edition:
 ``` bash
 mkdir -p /data/zbox && \
 docker run -d -p 80:80 -p 3306:3306 \
-        -e USER="root" -e PASSWD="password" \
+        -e ADMINER_USER="root" -e ADMINER_PASSWD="password" \
         -e BIND_ADDRESS="false" \
         -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
         -v /data/zbox/:/opt/zbox/ \
@@ -53,8 +53,8 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 
 ### Environment configuration
 
-* `USER` : set the web login database Adminer account.
-* `PASSWD` : set the web login database Adminer password. 
+* `ADMINER_USER` : set the web login database Adminer account.
+* `ADMINER_PASSWD` : set the web login database Adminer password. 
 * `BIND_ADDRESS` : if set value with `false`,the MySQL server will not bind address.
 * `SMTP_HOST` : set the smtp server IP and host.(If can't send mail,it will be helpful.)
 
@@ -74,7 +74,7 @@ cp -r /data/zbox /data/zbox-bak
 docker pull idoop/zentao:latest
 # run new container with the latest image and mount the same path
 docker run -d -p 80:80 -p 3306:3306 \
-        -e USER="root" -e PASSWD="password" \
+        -e ADMINER_USER="root" -e ADMINER_PASSWD="password" \
         -e BIND_ADDRESS="false" \
         -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
         -v /data/zbox/:/opt/zbox/ \

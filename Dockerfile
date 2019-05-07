@@ -3,7 +3,7 @@ MAINTAINER Swire Chen <idoop@msn.cn>
 
 ENV ZENTAO_VER=11.4.1
 
-ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/${ZENTAO_VER}/ZenTaoPMS.${ZENTAO_VER}.stable.zbox_64.tar.gz
+ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/${ZENTAO_VER}/ZenTaoPMS.${ZENTAO_VER}.zbox_64.tar.gz
 
 RUN curl ${ZENTAO_URL} -o /tmp/zbox.tar.gz
 

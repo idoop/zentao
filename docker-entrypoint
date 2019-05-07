@@ -15,23 +15,24 @@ elif [ "$#" == "0" ]; then
     rm -rf /opt/zbox/app/zentaopro
     # auto location / to /zentao/
     echo "<meta http-equiv=\"refresh\" content=\"0; url=/zentao/\" />" > /opt/zbox/app/htdocs/index.html
+
     if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
       sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
     fi
 
     # add apache http password for adminer
-    if [ -n "${USER}" -a -n "${PASSWD}" ]; then
-      /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
+    if [ -n "${ADMINER_USER}" -a -n "${ADMINER_PASSWD}" ]; then
+      /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${ADMINER_USER} ${ADMINER_PASSWD}
     fi
 
     # add smtp server ip to hosts
-    if [ -n "${SMTP_HOST}" ];then
+    if [ -n "${SMTP_HOST}" -a ! `grep -q "${SMTP_HOST}" /etc/hosts` ];then
       echo "${SMTP_HOST}" >> /etc/hosts
     fi
   elif [ -f "/opt/zbox/app/zentao/VERSION" ]; then
-    CURRENT_VER=`cat /opt/zbox/app/zentao/VERSION | sed 's|.stable||g'`
+    CURRENT_VER=`cat /opt/zbox/app/zentao/VERSION`
     echo "Installed Zentao version: $CURRENT_VER"
-    echo "New Zentao version: $ZENTAO_VER"
+    echo "New Zentao version: $ZENTAO_VER"
     if [ $ZENTAO_VER != $CURRENT_VER ]; then
       # upgrade zentao version
       echo "Backuping config/my.php and upload ..."
