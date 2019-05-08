@@ -2,6 +2,7 @@
 set -e
 
 MYSQL_CONFIG="/opt/zbox/etc/mysql/my.cnf"
+VERSION_FILE="/opt/zbox/app/zentao/VERSION"
 
 export PATH=/opt/zbox/:$PATH
 if [ "${1:0:1}" == "-" ]; then
@@ -9,60 +10,67 @@ if [ "${1:0:1}" == "-" ]; then
 elif [ "$#" == "0" ]; then
   # if the container run firstly
   if [ ! -d "/opt/zbox" -o ! -d "/opt/zbox/app" ]; then
-    echo "Installing Zentao version: $ZENTAO_VER ..."
+    echo "Installing Zentao version: ${ZENTAO_VER} ..."
     tar -zxf /tmp/zbox.tar.gz -C /opt/
-    rm -rf /opt/zbox/app/zentaoep
-    rm -rf /opt/zbox/app/zentaopro
-    # auto location / to /zentao/
-    echo "<meta http-equiv=\"refresh\" content=\"0; url=/zentao/\" />" > /opt/zbox/app/htdocs/index.html
-
+    rm -rf /opt/zbox/app/zentao[ep]*
+    
     if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
-      sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+      sed -e 's/^bind-address.*$/bind-address            = 0.0.0.0/' -i ${MYSQL_CONFIG}
     fi
 
-    # add apache http password for adminer
-    if [ -n "${ADMINER_USER}" -a -n "${ADMINER_PASSWD}" ]; then
-      /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${ADMINER_USER} ${ADMINER_PASSWD}
-    fi
+  elif [ -f "${VERSION_FILE}" -a `cat ${VERSION_FILE}` != ${ZENTAO_VER} ]; then
+    CURRENT_VER=`cat ${VERSION_FILE}`
+    echo -e "The Zentao need update.\n  Old version: $CURRENT_VER \n  New version: $ZENTAO_VER"
+    # upgrade zentao version
+    echo "Backuping config / my.php / upload ..."
+    cp /opt/zbox/app/zentao/config/my.php /opt/zbox/app/
+    mv /opt/zbox/app/zentao/www/data/upload /opt/zbox/app/
+    rm -rf /opt/zbox/app/zentao
 
-    # add smtp server ip to hosts
-    if [ -n "${SMTP_HOST}" -a ! `grep -q "${SMTP_HOST}" /etc/hosts` ];then
-      echo "${SMTP_HOST}" >> /etc/hosts
-    fi
-  elif [ -f "/opt/zbox/app/zentao/VERSION" ]; then
-    CURRENT_VER=`cat /opt/zbox/app/zentao/VERSION`
-    echo "Installed Zentao version: $CURRENT_VER"
-    echo "New Zentao version: $ZENTAO_VER"
-    if [ $ZENTAO_VER != $CURRENT_VER ]; then
-      # upgrade zentao version
-      echo "Backuping config/my.php and upload ..."
-      cp /opt/zbox/app/zentao/config/my.php /opt/zbox/app/
-      mv /opt/zbox/app/zentao/www/data/upload /opt/zbox/app/
-      rm -rf /opt/zbox/app/zentao
-      echo "Upgrading Zentao ..."
-      tar -zxf /tmp/zbox.tar.gz -C /tmp/
-      mv /tmp/zbox/app/zentao /opt/zbox/app/
-      mv /tmp/upgrade.php /opt/zbox/app/zentao/www/
-      chmod 664 /opt/zbox/app/zentao/www/upgrade.php
-      rm -rf /tmp/*
-      rm -rf /opt/zbox/tmp/apache/httpd.pid
-      # auto location / to /zentao/
-      echo "<meta http-equiv=\"refresh\" content=\"0; url=/zentao/\" />" > /opt/zbox/app/htdocs/index.html
-      echo "Restoring config/my.php and upload ..."
-      mv /opt/zbox/app/my.php /opt/zbox/app/zentao/config/my.php
-      rm -rf /opt/zbox/app/zentao/www/data/upload
-      mv /opt/zbox/app/upload /opt/zbox/app/zentao/www/data/
-      touch /opt/zbox/app/zentao/www/ok.txt
-      echo "Upgraded Zentao version to: $ZENTAO_VER"
-      echo "Please visit your Zentao website to complete the upgrade task."
-    fi
+    echo "Upgrading..."
+    tar -zxf /tmp/zbox.tar.gz -C /tmp/
+    mv /tmp/zbox/app/zentao /opt/zbox/app/
+    mv /tmp/upgrade.php /opt/zbox/app/zentao/www/
+    chmod 664 /opt/zbox/app/zentao/www/upgrade.php
+    rm -rf /opt/zbox/tmp/apache/httpd.pid /tmp/*
+
+    echo "Restoring config / my.php / upload ..."
+    mv /opt/zbox/app/my.php /opt/zbox/app/zentao/config/my.php
+    rm -rf /opt/zbox/app/zentao/www/data/upload
+    mv /opt/zbox/app/upload /opt/zbox/app/zentao/www/data/
+    touch /opt/zbox/app/zentao/www/ok.txt
+    echo "Upgraded Zentao version to: ${ZENTAO_VER}\nPlease visit your Zentao website to complete the upgrade task."
   fi
+  
+  # add apache http password for adminer
+  if [ -n "${ADMINER_USER}"  -a -n "${ADMINER_PASSWD}" ]; then
+    /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${ADMINER_USER} ${ADMINER_PASSWD}
+    chmod 0644 /opt/zbox/auth/users
+  fi
+  # compatible old version
+  if [ -n "${USER}" -a -n "${PASSWD}" ]; then
+    /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
+    chmod 0644 /opt/zbox/auth/users
+  fi
+
+  # add smtp server ip to hosts
+  if [ -n "${SMTP_HOST}" -a ! `grep -q "${SMTP_HOST}" /etc/hosts` ];then
+  echo "${SMTP_HOST}" >> /etc/hosts
+  fi
+
+  # auto location / to /zentao/
+  echo "<meta http-equiv=\"refresh\" content=\"0; url=/zentao/\" />" > /opt/zbox/app/htdocs/index.html
 
   # start service and health check
   cat /opt/zbox/README
   zbox start
-  tail -f /dev/null
-
+  sleep 120
+  loop=1
+  while [ ${loop} -eq 1 ]
+  do
+    wget http://localhost/ -O /dev/null || exit 1
+    sleep 30
+  done
 else
   exec "$@"
 fi

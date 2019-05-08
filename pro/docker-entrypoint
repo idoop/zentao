@@ -10,14 +10,16 @@ elif [ "$#" == "0" ]; then
   if [ ! -d "/opt/zbox" ]; then
     tar -zxf /tmp/zbox.tar.gz -C /opt/
     if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
-      sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+      #sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+      sed -e 's/^bind-address.*$/bind-address            = 0.0.0.0/' -i ${MYSQL_CONFIG}
     fi
   else
     WORK_DIR=`ls /opt/zbox`
     if [ -z "${WORK_DIR}" ];then
       tar -zxf /tmp/zbox.tar.gz -C /opt/
       if [[ "${BIND_ADDRESS}" == [fF][aA][lL][sS][eE] ]] && [ -f "${MYSQL_CONFIG}" ]; then
-        sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+        #sed -Ei 's/^bind-address/#&/' ${MYSQL_CONFIG}
+        sed -e 's/^bind-address.*$/bind-address            = 0.0.0.0/' -i ${MYSQL_CONFIG}
       fi
     fi
   fi
@@ -25,6 +27,7 @@ elif [ "$#" == "0" ]; then
   cat /opt/zbox/README && zbox start
   if [ -n "${USER}" -a -n "${PASSWD}" ]; then
     /opt/zbox/bin/htpasswd -b /opt/zbox/auth/users ${USER} ${PASSWD}
+    chmod 0644 /opt/zbox/auth/users
   fi
 
   if [ -n "${SMTP_HOST}" ];then

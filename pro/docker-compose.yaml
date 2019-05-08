@@ -1,8 +1,8 @@
-version: "2"
+version: "2.2"
 services: 
   zentao:
     image: idoop/zentao:pro
-    container_name: zentao
+    container_name: zentaopro
     ports:
       - "80:80"
       - "3306:3306"
@@ -13,9 +13,8 @@ services:
       USER: "root"
       PASSWD: "123456"
       BIND_ADDRESS: "false"
-#      SMTP_HOST: "163.177.90.125 smtp.exmail.qq.com"
     extra_hosts:
-      - "smtp.exmail.qq.com 163.177.90.125"
+      - "smtp.exmail.qq.com:163.177.90.125"
     volumes:
     # specifies the path replace "./data".
       - ./data:/opt/zbox/
