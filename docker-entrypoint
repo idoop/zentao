@@ -54,8 +54,9 @@ elif [ "$#" == "0" ]; then
   fi
 
   # add smtp server ip to hosts
-  if [ -n "${SMTP_HOST}" -a ! `grep -q "${SMTP_HOST}" /etc/hosts` ];then
-  echo "${SMTP_HOST}" >> /etc/hosts
+  IS_EXIST_SMTP_HOST=`grep "${SMTP_HOST}" /etc/hosts`
+  if [ -n "${SMTP_HOST}" -a -z "${IS_EXIST_SMTP_HOST}" ];then
+    echo "${SMTP_HOST}" >> /etc/hosts
   fi
 
   # auto location / to /zentao/
