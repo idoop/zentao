@@ -1,7 +1,7 @@
 FROM buildpack-deps:18.04-curl 
 MAINTAINER Swire Chen <idoop@msn.cn>
 
-ENV ZENTAO_VER=8.4
+ENV ZENTAO_VER=8.5
 
 ARG ZENTAO_URL=http://dl.cnezsoft.com/zentao/pro${ZENTAO_VER}/ZenTaoPMS.pro${ZENTAO_VER}.zbox_64.tar.gz
 
