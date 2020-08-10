@@ -121,3 +121,19 @@ Then execute the following command:
 ``` bash
 docker build -t zentao .
 ```
+
+### FAQ
+upgrade or auto remove plugins when restart?
+
+added `ZENTAO_VER` env when u startup (e.g. `-e ZENTAO_VER="12.3.stable"`, because Dockerfile's `ZENTAO_VER` (that is `12.3.2`) not eq `cat /opt/zbox/app/zentao/VERSION` (that is `12.3.stable` ))
+
+```bash
+docker run -d -p 80:80 -p 3306:3306 \
+        -e ADMINER_USER="root" -e ADMINER_PASSWD="password" \
+        -e BIND_ADDRESS="false" \
+        -e ZENTAO_VER="12.3.stable" \
+        -v /data/zbox/:/opt/zbox/ \
+        --add-host smtp.exmail.qq.com:163.177.90.125 \
+        --name zentao-server \
+        idoop/zentao:latest
+```
