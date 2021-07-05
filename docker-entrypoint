@@ -67,13 +67,7 @@ elif [ "$#" == "0" ]; then
   # start service and health check
   cat /opt/zbox/README
   zbox start
-  sleep 120
-  loop=1
-  while [ ${loop} -eq 1 ]
-  do
-    wget http://localhost/ -O /dev/null || exit 1
-    sleep 30
-  done
+  tail -f /dev/null
 else
   exec "$@"
 fi
