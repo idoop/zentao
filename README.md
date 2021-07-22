@@ -2,8 +2,9 @@
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/idoop/zentao)](https://hub.docker.com/r/idoop/zentao/)
 [![Docker Automated build](https://img.shields.io/docker/automated/idoop/zentao)](https://hub.docker.com/r/idoop/zentao/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/idoop/zentao.svg)](https://hub.docker.com/r/idoop/zentao/)
-![Docker Stars](https://img.shields.io/docker/stars/idoop/zentao)
+[![Docker Stars](https://img.shields.io/docker/stars/idoop/zentao)](https://hub.docker.com/r/idoop/zentao/)
 [![ImageLayers Size](https://img.shields.io/docker/image-size/idoop/zentao/latest)](https://hub.docker.com/r/idoop/zentao/)
+[![GitHub stars](https://img.shields.io/github/stars/idoop/zentao)](https://github.com/idoop/zentao)
 
 Auto build docker image for zentao(禅道),include open source edition and pro edition.
 
@@ -14,7 +15,7 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `15.0.3`, `latest`
+- `15.2`, `latest`
 - `15.0.1`, `15.0.2`,`15.0.3`
 - `12.0`, `12.0.1`, `12.3`, `12.3.2`, `12.4.4`, `12.5.3`
 - `11.3`, `11.4.1`, `11.5.1`, `11.6`, `11.6.1`, `11.6.5`, `11.7`
