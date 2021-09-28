@@ -7,7 +7,7 @@ ADD https://raw.githubusercontent.com/easysoft/zentaopms/master/www/upgrade.php.
 
 COPY docker-entrypoint /usr/local/bin/docker-entrypoint
 
-RUN curl -sSL ${ZENTAO_URL} -o /tmp/zbox.tar.gz \
+RUN curl --dns-servers 1.2.4.8 -sSL ${ZENTAO_URL} -o /tmp/zbox.tar.gz \
     && chmod +x /usr/local/bin/docker-entrypoint
 
 HEALTHCHECK --start-period=20s --interval=45s --timeout=3s CMD wget http://localhost/ -O /dev/null || exit 1
