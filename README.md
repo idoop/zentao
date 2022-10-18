@@ -15,7 +15,7 @@ Office Support:[http://www.zentao.net/](http://www.zentao.net/)
 
 **Open soure edition**
 
-- `17.0`,`17.1`,`17.2`,`17.3`,`latest`
+- `17.0`,`17.1`,`17.2`,`17.3`,`17.4`,`latest`
 - `16.0`,`16.1`,`16.2`,`16.3`,`16.4`,`16.5`
 - `15.2`,`15.3`,`15.4`,`15.5`,`15.6`,`15.7`,`15.7.1`
 - `15.0.1`, `15.0.2`,`15.0.3`,`15.2`
@@ -61,12 +61,12 @@ Note: Make sure your Host feed available on either port `80` or `3306`.
 
 ### Environment configuration
 
-* `ADMINER_USER` : set the web login database Adminer account.
-* `ADMINER_PASSWD` : set the web login database Adminer password. 
+* `ADMINER_USER` : set the database Adminer account.
+* `ADMINER_PASSWD` : set the database Adminer password. 
 * `BIND_ADDRESS` : if set value with `false`,the MySQL server will not bind address.
 * `SMTP_HOST` : set the smtp server IP and host.(If can't send mail,it will be helpful.) Can also use `extra_host` in docker-compose.yaml,or use param `--add-host` when use `dokcer run` command.
 
-Note: The Zentao administrator account is **admin**,and default initialization password is **123456**.
+Note: The Zentao web login administrator account is **admin**,and default initialization password is **123456**.
       And MySQL root account password is **123456**,please change password when you first login.
 
 ### Upgrade Version
